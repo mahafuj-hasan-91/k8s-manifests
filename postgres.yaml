@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: ba-cirt-infra
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: ba-cirt-infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: incident_db
+            - name: POSTGRES_USER
+              value: incident_user
+            - name: POSTGRES_PASSWORD
+              value: SecurePass123!
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: ba-cirt-infra
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432

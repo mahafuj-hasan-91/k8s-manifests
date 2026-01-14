@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: incident-ingress
+  namespace: ba-cirt-infra
+spec:
+  rules:
+    - host: ba-industrial-training.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: incident-reporting-system
+                port:
+                  number: 80
