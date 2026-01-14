@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: yourdockerhub/incident-reporting-system:latest
+          image: bytebender0/incident-reporting-system:6
           ports:
             - containerPort: 8080
           env:
