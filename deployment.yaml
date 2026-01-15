@@ -25,3 +25,5 @@ spec:
                 -Dspring.datasource.username=incident_user
                 -Dspring.datasource.password=SecurePass123!
                 -Dspring.jpa.hibernate.ddl-auto=update
+                -Dserver.forward-headers-strategy=framework
+                -Dserver.tomcat.remoteip.internal-proxies=.*
