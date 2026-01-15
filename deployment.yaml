@@ -24,3 +24,4 @@ spec:
                 -Dspring.datasource.url=jdbc:postgresql://postgres:5432/incident_db
                 -Dspring.datasource.username=incident_user
                 -Dspring.datasource.password=SecurePass123!
+                -Dspring.jpa.hibernate.ddl-auto=update
