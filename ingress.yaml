@@ -4,7 +4,7 @@ metadata:
   name: incident-ingress
   namespace: ba-cirt-infra
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
     - host: ba-industrial-training.com
       http:
