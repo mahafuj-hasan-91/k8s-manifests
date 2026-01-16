@@ -3,6 +3,12 @@ kind: Ingress
 metadata:
   name: incident-ingress
   namespace: ba-cirt-infra
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://ba-industrial-training.com"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Origin "http://ba-industrial-training.com";
+      proxy_set_header Referer "http://ba-industrial-training.com";
 spec:
   ingressClassName: nginx
   rules:
